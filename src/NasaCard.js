@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// Import Image Styling
+import { Image, Header, Icon, Card } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 function NasaCard() {
     const [ nasaData, setNasaData] = useState('');
@@ -9,7 +12,7 @@ function NasaCard() {
 
     useEffect( () => {
         axios
-            .get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2019-07-15')
+            .get('https://api.nasa.gov/planetary/apod?api_key=DngedQDWYqFLh2mupmsu1Gtpngs0mkQhg1BVL3g3&date=2019-07-12')
 
             .then(res => {
                 console.log(res.data)
@@ -26,18 +29,47 @@ function NasaCard() {
     }, [])
 
     return (
-        <div>
-            <h2>
-                { title }
-            </h2>
-            <h3>
-                { date }
-            </h3>
-            <img className='image' src={ nasaData } />
-            <p>
+        <Card centered circular size='massive'>
+            <Card.Content extra>
+                <Card.Header>{ title }</Card.Header>
+                <Card.Meta>{ date }</Card.Meta>
+            </Card.Content>
+            <Image
+            src={ nasaData } 
+            as='a'
+            href='https://apod.nasa.gov/apod/ap190712.html'
+            target='blank'
+            size='medium'
+            circular 
+            wrapped ui={false} 
+            />
+            <Card.Content>
+                <Card.Description>
                 { caption }
-            </p>
-        </div>
+                </Card.Description>
+            </Card.Content>
+        </Card>
+        // <div>
+        //     <Header as='h3' color='grey' textAlign='center'>
+        //         { title }
+        //     </Header>
+        //     <Header as='h4' color='grey'>
+        //         { date }
+        //     </Header>
+        //     <Image 
+        //     className='image'
+            // src={ nasaData } 
+            // as='a'
+            // href='https://apod.nasa.gov/apod/ap190712.html'
+            // target='blank'
+            // size='medium'
+            // circular
+        //     floated='right'
+        //     />
+        //     <p>
+        //         { caption }
+        //     </p>
+        // </div>
     )
 }
 
