@@ -3,7 +3,9 @@ import axios from 'axios';
 
 function NasaCard() {
     const [ nasaData, setNasaData] = useState('');
-    console.log({ setNasaData });
+    const [ title, setTitle] = useState();
+    const [ date, setDate] = useState();
+    const [ caption, setCaption] = useState();
 
     useEffect( () => {
         axios
@@ -11,12 +13,10 @@ function NasaCard() {
 
             .then(res => {
                 console.log(res.data)
-                const imgURL = res.data.hdurl
-                const title = res.data.title
-                const date = res.data.date
-                const caption = res.data.explanation
-                console.log(imgURL)
-                // const title = res.data
+                setNasaData(res.data.hdurl)
+                setTitle(res.data.title)
+                setDate(res.data.date)
+                setCaption(res.data.explanation)
 
             })
 
@@ -28,14 +28,14 @@ function NasaCard() {
     return (
         <div>
             <h2>
-                {/* { title } */}
+                { title }
             </h2>
             <h3>
-                {/* { date } */}
+                { date }
             </h3>
-            <img src={'imgURL'} alt=''/>
-            <p className='date'>
-                {/* { caption } */}
+            <img className='image' src={ nasaData } />
+            <p>
+                { caption }
             </p>
         </div>
     )
